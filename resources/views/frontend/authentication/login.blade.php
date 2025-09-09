@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        Login | {{ readConfig('site_name') }}
+        Connexion | {{ readConfig('site_name') }}
     </title>
     <!-- FAVICON ICON -->
     <link rel="shortcut icon" href="{{ assetImage(readconfig('site_logo')) }}" type="image/svg+xml">
@@ -21,7 +21,7 @@
 <body>
     <x-simple-alert />
 
-    <!-- AUTHENTICATION-START (LOGIN) -->
+    <!-- AUTHENTIFICATION-DÉBUT (CONNEXION) -->
     <section class="authentications">
         <div class="left-content">
             <figure class="">
@@ -36,30 +36,30 @@
                     <a href="{{ route('frontend.home') }}" class="logo">
                         <img src="{{ assetImage(readconfig('site_logo')) }}" width="200px" alt="brand-logo">
                     </a>
-                    <h3 class="form-title">Sign in</h3>
-                    <p class="form-des">Welcome back! Sign in to access your account.</p>
+                    <h3 class="form-title">Se connecter</h3>
+                    <p class="form-des">Ravi de vous revoir ! Connectez-vous pour accéder à votre compte.</p>
                 </div>
                 <div class="authentication-form-content">
                     <div class="row g-4">
 
                         <div class="col-sm-6 col-lg-12 col-xl-6">
                             <div class="form-group">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" placeholder="Enter email"
+                                <label for="email" class="form-label">E-mail</label>
+                                <input type="email" class="form-control" id="email" placeholder="Entrez votre e-mail"
                                     autocomplete="off" name="email" required>
                                 <div class="invalid-feedback">
-                                    Please enter a valid email address.
+                                    Veuillez entrer une adresse e-mail valide.
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-sm-6 col-lg-12 col-xl-6">
                             <div class="form-group">
-                                <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="password" placeholder="Enter password"
+                                <label for="password" class="form-label">Mot de passe</label>
+                                <input type="password" class="form-control" id="password" placeholder="Entrez votre mot de passe"
                                     autocomplete="off" name="password" required>
                                 <div class="invalid-feedback">
-                                    Please enter a password.
+                                    Veuillez entrer un mot de passe.
                                 </div>
                                 <div class="show-hide toggle-password" id="toggleIcon">
                                     <span class="eye-icon">
@@ -104,9 +104,9 @@
                                     <div class="customcheck ">
                                         <input type="checkbox" id="rememberMe" class="customcheck-box"
                                             name="remember_me" hidden>
-                                        <label for="rememberMe" class="customcheck-label">Remember me</label>
+                                        <label for="rememberMe" class="customcheck-label">Se souvenir de moi</label>
                                     </div>
-                                    <a href="{{ route('forget.password') }}" class="forget">Forgot password</a>
+                                    <a href="{{ route('forget.password') }}" class="forget">Mot de passe oublié ?</a>
                                 </div>
                             </div>
                             {{-- <div class="single-row">
@@ -124,11 +124,11 @@
 
                         <div class="col-sm-6 col-lg-12 col-xl-6">
                             <div class="form-group">
-                                <button type="submit" class="create-account-btn w-100">Sign In</button>
+                                <button type="submit" class="create-account-btn w-100">Se connecter</button>
                             </div>
                             <div class="form-group"> <br>
-                            <p><b>User:</b> demo@qtecsolution.net</p>
-                            <p><b>Password:</b> 87654321</p>
+                            {{-- <p><b>Utilisateur :</b> demo@qtecsolution.net</p>
+                            <p><b>Mot de passe :</b> 87654321</p> --}}
                             </div>
                         </div>
 
@@ -170,12 +170,12 @@
                     </div>
                 </div>
                 <div class="authentication-form-footer">
-                    <p>Don’t have an account? <a href="{{ route('signup') }}">Sign up </a></p>
+                    {{-- <p>Vous n'avez pas de compte ? <a href="{{ route('signup') }}">Inscrivez-vous</a></p> --}}
                 </div>
             </form>
         </div>
     </section>
-    <!-- AUTHENTICATION-END -->
+    <!-- AUTHENTIFICATION-FIN -->
 
 
     <!-- BOOTSTRAP JS (5.3) -->

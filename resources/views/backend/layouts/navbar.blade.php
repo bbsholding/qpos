@@ -5,7 +5,7 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         {{-- <li class="nav-item d-none d-sm-inline-block">
-            <a href="index3.html" class="nav-link">Home</a>
+            <a href="index3.html" class="nav-link">Accueil</a>
         </li> --}}
         {{-- <li class="nav-item d-none d-sm-inline-block">
             <a href="#" class="nav-link">Contact</a>
@@ -32,21 +32,21 @@
                 <span class="dropdown-item dropdown-header">15 Notifications</span>
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item">
-                    <i class="fas fa-envelope mr-2"></i> 4 new messages
-                    <span class="float-right text-muted text-sm">3 mins</span>
+                    <i class="fas fa-envelope mr-2"></i> 4 nouveaux messages
+                    <span class="float-right text-muted text-sm">il y a 3 min</span>
                 </a>
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item">
-                    <i class="fas fa-users mr-2"></i> 8 friend requests
-                    <span class="float-right text-muted text-sm">12 hours</span>
+                    <i class="fas fa-users mr-2"></i> 8 demandes d'ami
+                    <span class="float-right text-muted text-sm">il y a 12 heures</span>
                 </a>
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item">
-                    <i class="fas fa-file mr-2"></i> 3 new reports
-                    <span class="float-right text-muted text-sm">2 days</span>
+                    <i class="fas fa-file mr-2"></i> 3 nouveaux rapports
+                    <span class="float-right text-muted text-sm">il y a 2 jours</span>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                <a href="#" class="dropdown-item dropdown-footer">Voir toutes les notifications</a>
             </div>
         </li> -->
         <li class="nav-item">
@@ -62,12 +62,12 @@
             <div class="dropdown-menu ">
                 <a href="{{ route('backend.admin.profile') }}" class="dropdown-item dropdown-footer">
                     <i class="fas fa-address-card"></i>
-                    Profile
+                    Profil
                 </a>
                 <div class="dropdown-divider"></div>
                 <a href="{{ route('logout') }}" class="dropdown-item dropdown-footer">
                     <i class="fas fa-sign-out-alt"></i>
-                    Logout
+                    Déconnexion
                 </a>
             </div>
         </li>

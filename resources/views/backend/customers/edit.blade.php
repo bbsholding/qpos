@@ -13,7 +13,7 @@
         <div class="row">
           <div class="mb-3 col-md-6">
             <label for="title" class="form-label">
-              Name
+              Nom
               <span class="text-danger">*</span>
             </label>
             <input type="text" class="form-control" placeholder="Enter title" name="name"
@@ -21,7 +21,7 @@
           </div>
           <div class="mb-3 col-md-6">
             <label for="title" class="form-label">
-              Phone
+              Téléphone
               <span class="text-danger">*</span>
             </label>
             <input type="text" class="form-control" placeholder="Enter phone" name="phone"
@@ -29,7 +29,7 @@
           </div>
           <div class="mb-3 col-md-6">
             <label for="title" class="form-label">
-              Address
+              Adresse
             </label>
             <input type="text" class="form-control" placeholder="Enter Address" name="address"
               value="{{ $customer->address }}">
@@ -37,7 +37,7 @@
         </div>
         <div class="row">
           <div class="col-md-6">
-            <button type="submit" class="btn bg-gradient-primary">Update</button>
+            <button type="submit" class="btn bg-gradient-primary">Mettre à jour</button>
           </div>
         </div>
       </div>

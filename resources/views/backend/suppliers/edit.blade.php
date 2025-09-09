@@ -1,6 +1,6 @@
 @extends('backend.master')
 
-@section('title', 'Create Supplier')
+@section('title', 'Modifier un fournisseur')
 
 @section('content')
 <div class="card">
@@ -13,31 +13,31 @@
         <div class="row">
           <div class="mb-3 col-md-6">
             <label for="title" class="form-label">
-              Name
+              Nom
               <span class="text-danger">*</span>
             </label>
-            <input type="text" class="form-control" placeholder="Enter title" name="name"
+            <input type="text" class="form-control" placeholder="Entrez le nom" name="name"
               value="{{ $supplier->name }}" required>
           </div>
           <div class="mb-3 col-md-6">
             <label for="title" class="form-label">
-              Phone
+              Téléphone
               <span class="text-danger">*</span>
             </label>
-            <input type="text" class="form-control" placeholder="Enter phone" name="phone"
+            <input type="text" class="form-control" placeholder="Entrez le téléphone" name="phone"
               value="{{ $supplier->phone }}" required>
           </div>
           <div class="mb-3 col-md-6">
             <label for="title" class="form-label">
-              Address
+              Adresse
             </label>
-            <input type="text" class="form-control" placeholder="Enter Address" name="address"
+            <input type="text" class="form-control" placeholder="Entrez l'adresse" name="address"
               value="{{ $supplier->address }}">
           </div>
         </div>
         <div class="row">
           <div class="col-md-6">
-            <button type="submit" class="btn bg-gradient-primary">Update</button>
+            <button type="submit" class="btn bg-gradient-primary">Mettre à jour</button>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 @extends('backend.master')
 
-@section('title', 'Customers')
+@section('title', 'Clients')
 
 @section('content')
 <div class="card">
@@ -8,7 +8,7 @@
   <div class="mt-n5 mb-3 d-flex justify-content-end">
     <a href="{{ route('backend.admin.customers.create') }}" class="btn bg-gradient-primary">
       <i class="fas fa-plus-circle"></i>
-      Add New
+  Ajouter un client
     </a>
   </div>
   @endcan
@@ -20,10 +20,10 @@
             <thead>
               <tr>
                 <th data-orderable="false">#</th>
-                <th>Name</th>
-                <th>Phone</th>
-                <th>Address</th>
-                <th>Created</th>
+                <th>Nom</th>
+                <th>Téléphone</th>
+                <th>Adresse</th>
+                <th>Créé le</th>
                 <th data-orderable="false">
                   Action
                 </th>
@@ -46,37 +46,41 @@
       serverSide: true,
       ordering: true,
       order: [
-        [1, 'asc']
+        [0, 'asc']
       ],
       ajax: {
         url: "{{ route('backend.admin.customers.index') }}"
       },
-
-      columns: [{
-          data: 'DT_RowIndex',
-          name: 'DT_RowIndex'
+      columns: [
+        { data: 'DT_RowIndex', name: 'DT_RowIndex' },
+        { data: 'name', name: 'name' },
+        { data: 'phone', name: 'phone' },
+        { data: 'address', name: 'address' },
+        { data: 'created_at', name: 'created_at' },
+        { data: 'action', name: 'action' },
+      ],
+      language: {
+        "sProcessing":     "Traitement en cours...",
+        "sSearch":        "Rechercher :",
+        "sLengthMenu":    "Afficher _MENU_ éléments",
+        "sInfo":          "Affichage de l'élément _START_ à _END_ sur _TOTAL_ éléments",
+        "sInfoEmpty":     "Affichage de l'élément 0 à 0 sur 0 élément",
+        "sInfoFiltered":  "(filtré de _MAX_ éléments au total)",
+        "sInfoPostFix":   "",
+        "sLoadingRecords": "Chargement en cours...",
+        "sZeroRecords":   "Aucun élément à afficher",
+        "sEmptyTable":    "Aucune donnée disponible dans le tableau",
+        "oPaginate": {
+            "sFirst":      "Premier",
+            "sPrevious":   "Précédent",
+            "sNext":       "Suivant",
+            "sLast":       "Dernier"
         },
-        {
-          data: 'name',
-          name: 'name'
-        },
-        {
-          data: 'phone',
-          name: 'phone'
-        },
-        {
-          data: 'address',
-          name: 'address'
-        },
-        {
-          data: 'created_at',
-          name: 'created_at'
-        },
-        {
-          data: 'action',
-          name: 'action'
-        },
-      ]
+        "oAria": {
+            "sSortAscending":  ": activer pour trier la colonne par ordre croissant",
+            "sSortDescending": ": activer pour trier la colonne par ordre décroissant"
+        }
+      }
     });
   });
 </script>
