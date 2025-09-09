@@ -9,7 +9,7 @@
   <div class="mt-n5 mb-3 d-flex justify-content-end">
     <a href="{{ route('backend.admin.products.create') }}" class="btn bg-gradient-primary">
       <i class="fas fa-plus-circle"></i>
-      Add New
+      Ajouter un produit
     </a>
   </div>
   @endcan
@@ -22,11 +22,11 @@
               <tr>
                 <th data-orderable="false">#</th>
                 <th></th>
-                <th>Name</th>
-                <th>Price{{currency()->symbol??''}}</th>
+                <th>Nom</th>
+                <th>Prix{{currency()->symbol??''}}</th>
                 <th>Stock</th>
-                <th>Created</th>
-                <th>Status</th>
+                <th>Créé le</th>
+                <th>Statut</th>
                 <th data-orderable="false">Action</th>
               </tr>
             </thead>
@@ -49,6 +49,28 @@
       ordering: true,
       ajax: {
         url: "{{ route('backend.admin.products.index') }}"
+      },
+      language: {
+        "sProcessing":     "Traitement en cours...",
+        "sSearch":        "Rechercher :",
+        "sLengthMenu":    "Afficher _MENU_ éléments",
+        "sInfo":          "Affichage de l'élément _START_ à _END_ sur _TOTAL_ éléments",
+        "sInfoEmpty":     "Affichage de l'élément 0 à 0 sur 0 élément",
+        "sInfoFiltered":  "(filtré de _MAX_ éléments au total)",
+        "sInfoPostFix":   "",
+        "sLoadingRecords": "Chargement en cours...",
+        "sZeroRecords":   "Aucun élément à afficher",
+        "sEmptyTable":    "Aucune donnée disponible dans le tableau",
+        "oPaginate": {
+            "sFirst":      "Premier",
+            "sPrevious":   "Précédent",
+            "sNext":       "Suivant",
+            "sLast":       "Dernier"
+        },
+        "oAria": {
+            "sSortAscending":  ": activer pour trier la colonne par ordre croissant",
+            "sSortDescending": ": activer pour trier la colonne par ordre décroissant"
+        }
       },
 
       columns: [{

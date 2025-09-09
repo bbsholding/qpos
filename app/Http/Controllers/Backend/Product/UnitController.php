@@ -29,12 +29,12 @@ class UnitController extends Controller
                     </button>
                     <div class="dropdown-menu" role="menu">
                       <a class="dropdown-item" href="' . route('backend.admin.units.edit', $data->id) . '" ' .' >
-                    <i class="fas fa-edit"></i> Edit
+                    <i class="fas fa-edit"></i> Editer
                 </a> <div class="dropdown-divider"></div>
 <form action="' . route('backend.admin.units.destroy', $data->id) . '"method="POST" style="display:inline;">
                    ' . csrf_field() . '
                     ' . method_field("DELETE") . '
-<button type="submit" class="dropdown-item" onclick="return confirm(\'Are you sure ?\')"><i class="fas fa-trash"></i> Delete</button>
+<button type="submit" class="dropdown-item" onclick="return confirm(\'Êtes-vous sûr ?\')"><i class="fas fa-trash"></i> Supprimer</button>
                   </form>
                   </div>';
                 })
@@ -61,7 +61,7 @@ class UnitController extends Controller
         abort_if(!auth()->user()->can('unit_create'), 403);
         $unit = Unit::create($request->only(['title','short_name']));
 
-        return redirect()->route('backend.admin.units.index')->with('success', 'Unit created successfully!');
+        return redirect()->route('backend.admin.units.index')->with('success', 'Unité créée avec succès !');
     }
 
     /**
@@ -91,7 +91,7 @@ class UnitController extends Controller
         abort_if(!auth()->user()->can('unit_update'), 403);
         $unitToUpdate = Unit::findOrFail($id);
         $unitToUpdate->update($request->only(['title', 'short_name']));
-        return redirect()->route('backend.admin.units.index')->with('success', 'Unit updated successfully!');
+        return redirect()->route('backend.admin.units.index')->with('success', 'Unité mise à jour avec succès !');
     }
 
 
@@ -103,6 +103,6 @@ class UnitController extends Controller
         abort_if(!auth()->user()->can('unit_delete'), 403);
         $unit = Unit::findOrFail($id);
         $unit->delete();
-        return redirect()->back()->with('success', 'Unit Deleted Successfully');
+        return redirect()->back()->with('success', 'Unité supprimée avec succès !');
     }
 }

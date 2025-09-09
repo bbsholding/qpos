@@ -38,10 +38,10 @@ class PurchaseController extends Controller
                     </button>
                     <div class="dropdown-menu" role="menu">
                       <a class="dropdown-item" href="' . route('backend.admin.purchase.create', ['purchase_id' => $data->id]) . '">
-                    <i class="fas fa-edit"></i> Edit
-                </a> 
+                    <i class="fas fa-edit"></i> Editer
+                </a>
   <a class="dropdown-item" href="' . route('backend.admin.purchase.products', $data->id) . '">
-                <i class="fas fa-eye"></i> View
+                <i class="fas fa-eye"></i> Voir
             </a>
                     </div>
                   </div>';
@@ -139,7 +139,7 @@ class PurchaseController extends Controller
                     ]);
                     // Step 3: Create purchase items
                     foreach ($validatedData['products'] as $product) {
-                        $existingProduct = Product::findOrFail($product['id']); 
+                        $existingProduct = Product::findOrFail($product['id']);
                         // Find the existing purchase item, if any, and get its quantity or set to 0
                         $oldPurchaseItem = PurchaseItem::find($product['item_id']??0);
                         $oldQuantity = $oldPurchaseItem ? $oldPurchaseItem->quantity : 0;
@@ -168,7 +168,7 @@ class PurchaseController extends Controller
             }
             // Step 4: Return a response
             return response()->json([
-                'message' => 'Purchase saved successfully.',
+                'message' => 'Achat créé avec succès.',
                 'purchase' => $purchase,
             ], 201);
         }

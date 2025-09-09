@@ -1,6 +1,6 @@
 @extends('backend.master')
 
-@section('title', 'Create Category')
+@section('title', 'Créer une catégorie')
 
 @section('content')
 <div class="card">
@@ -12,10 +12,10 @@
         <div class="row">
           <div class="mb-3 col-md-6">
             <label for="title" class="form-label">
-              Name
+              Nom
               <span class="text-danger">*</span>
             </label>
-            <input type="text" class="form-control" placeholder="Enter title" name="name"
+            <input type="text" class="form-control" placeholder="Entrez le nom" name="name"
               value="{{ old('name') }}" required>
           </div>
           <div class="mb-3 col-md-6">
@@ -29,7 +29,7 @@
                   class="img-thumbnail d-none" id="thumbnailPreview">
                 <div class="upload-text">
                   <i class="fas fa-plus-circle"></i>
-                  <span>Upload Image</span>
+                  <span>Télécharger une image</span>
                 </div>
               </div>
             </div>
@@ -39,7 +39,7 @@
             <label for="description" class="form-label">
               Description
             </label>
-            <textarea class="form-control" placeholder="Enter description" name="description">{{ old('description') }}</textarea>
+            <textarea class="form-control" placeholder="Entrez la description" name="description">{{ old('description') }}</textarea>
           </div>
           <div class="mb-3 col-md-12">
             <div class="form-switch px-4">
@@ -47,14 +47,14 @@
               <input class="form-check-input" type="checkbox" name="status" id="active"
                 value="1" checked>
               <label class="form-check-label" for="active">
-                Active
+                Actif
               </label>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-md-6">
-            <button type="submit" class="btn bg-gradient-primary">Create</button>
+            <button type="submit" class="btn bg-gradient-primary">Créer</button>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 @extends('backend.master')
 
-@section('title', 'Create Unit')
+@section('title', 'Créer une unité')
 
 @section('content')
 <div class="card">
@@ -12,24 +12,24 @@
         <div class="row">
           <div class="mb-3 col-md-6">
             <label for="title" class="form-label">
-              Title
+              Intitulé
               <span class="text-danger">*</span>
             </label>
-            <input type="text" class="form-control" placeholder="Enter title" name="title"
+            <input type="text" class="form-control" placeholder="Entrez l'intitulé" name="title"
               value="{{ old('title') }}" required>
           </div>
           <div class="mb-3 col-md-6">
             <label for="short_name" class="form-label">
-              Short Name
+              Nom court
               <span class="text-danger">*</span>
             </label>
-            <input type="text" class="form-control" placeholder="Enter Short Name" name="short_name"
+            <input type="text" class="form-control" placeholder="Entrez le nom court" name="short_name"
               value="{{ old('short_name') }}" required>
           </div>
         </div>
         <div class="row">
           <div class="col-md-6">
-            <button type="submit" class="btn bg-gradient-primary">Create</button>
+            <button type="submit" class="btn bg-gradient-primary">Créer</button>
           </div>
         </div>
       </div>

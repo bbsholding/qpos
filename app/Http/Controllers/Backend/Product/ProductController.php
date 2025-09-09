@@ -59,16 +59,16 @@ class ProductController extends Controller
                     </button>
                     <div class="dropdown-menu" role="menu">
                       <a class="dropdown-item" href="'.route('backend.admin.products.edit', $data->id). '">
-                    <i class="fas fa-edit"></i> Edit
+                    <i class="fas fa-edit"></i> Editer
                 </a> <div class="dropdown-divider"></div>
 <form action="' . route('backend.admin.products.destroy', $data->id) . '"method="POST" style="display:inline;">
                    ' . csrf_field() . '
                     ' . method_field("DELETE") . '
-<button type="submit" class="dropdown-item" onclick="return confirm(\'Are you sure ?\')"><i class="fas fa-trash"></i> Delete</button>
+<button type="submit" class="dropdown-item" onclick="return confirm(\'Etes vous sûr de vouloir supprimer ce produit ?\')"><i class="fas fa-trash"></i> Supprimer</button>
                   </form>
 <div class="dropdown-divider"></div>
   <a class="dropdown-item" href="' . route('backend.admin.purchase.create', ['barcode' => $data->sku]) . '">
-                <i class="fas fa-cart-plus"></i> Purchase
+                <i class="fas fa-cart-plus"></i> Achat
             </a>
                     </div>
                   </div>';
@@ -124,7 +124,7 @@ class ProductController extends Controller
             $product->save();
         }
 
-        return redirect()->route('backend.admin.products.index')->with('success', 'Product created successfully!');
+        return redirect()->route('backend.admin.products.index')->with('success', 'Produit créé avec succès!');
     }
 
     /**
@@ -167,7 +167,7 @@ class ProductController extends Controller
             $this->fileHandler->secureUnlink($oldImage);
         }
 
-        return redirect()->route('backend.admin.products.index')->with('success', 'Product updated successfully!');
+        return redirect()->route('backend.admin.products.index')->with('success', 'Produit mis à jour avec succès!');
     }
 
     /**
@@ -182,7 +182,7 @@ class ProductController extends Controller
             $this->fileHandler->secureUnlink($product->image);
         }
         $product->delete();
-        return redirect()->back()->with('success', 'Product Deleted Successfully');
+        return redirect()->back()->with('success', 'Produit supprimé avec succès!');
     }
     public function import(Request $request)
     {

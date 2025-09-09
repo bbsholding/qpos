@@ -39,12 +39,12 @@ class CategoryController extends Controller
                     </button>
                     <div class="dropdown-menu" role="menu">
                       <a class="dropdown-item" href="' . route('backend.admin.categories.edit', $data->id) . '" ' . ' >
-                    <i class="fas fa-edit"></i> Edit
+                    <i class="fas fa-edit"></i> Editer
                 </a> <div class="dropdown-divider"></div>
 <form action="' . route('backend.admin.categories.destroy', $data->id) . '"method="POST" style="display:inline;">
                    ' . csrf_field() . '
                     ' . method_field("DELETE") . '
-<button type="submit" class="dropdown-item" onclick="return confirm(\'Are you sure ?\')"><i class="fas fa-trash"></i> Delete</button>
+<button type="submit" class="dropdown-item" onclick="return confirm(\'Êtes-vous sûr de vouloir supprimer cette catégorie ?\')"><i class="fas fa-trash"></i> Supprimer</button>
                   </form>
                   </div>';
                 })
@@ -81,7 +81,7 @@ class CategoryController extends Controller
             $category->save();
         }
 
-        return redirect()->route('backend.admin.categories.index')->with('success', 'Category created successfully!');
+        return redirect()->route('backend.admin.categories.index')->with('success', 'Catégorie créée avec succès!');
     }
 
     /**
@@ -124,7 +124,7 @@ class CategoryController extends Controller
             $this->fileHandler->secureUnlink($oldImage);
         }
 
-        return redirect()->route('backend.admin.categories.index')->with('success', 'Category updated successfully!');
+        return redirect()->route('backend.admin.categories.index')->with('success', 'Catégorie mise à jour avec succès!');
     }
 
     /**
@@ -138,6 +138,6 @@ class CategoryController extends Controller
             $this->fileHandler->secureUnlink($category->image);
         }
         $category->delete();
-        return redirect()->back()->with('success', 'Category Deleted Successfully');
+        return redirect()->back()->with('success', 'Catégorie supprimée avec succès');
     }
 }

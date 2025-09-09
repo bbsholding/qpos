@@ -1,15 +1,15 @@
 @extends('backend.master')
 
-@section('title', 'Customers')
+@section('title', 'Produits de l\'achat')
 
 @section('content')
 <div class="card">
   <div class="card-body p-2 p-md-4 pt-0">
     <div class="row invoice-info">
       <div class="col-sm-4 invoice-col">
-        Supplier
+        Fournisseur
         <address>
-          <strong>Name: {{ $purchase->supplier->name }}</strong><br>
+          <strong>Nom : {{ $purchase->supplier->name }}</strong><br>
         </address>
       </div>
     </div>
@@ -20,13 +20,13 @@
             <thead>
               <tr>
                 <th data-orderable="false">#</th>
-                <th>Product</th>
-                <th>Purchase Price{{currency()->symbol??''}}</th>
+                <th>Produit</th>
+                <th>Prix d'achat{{currency()->symbol??''}}</th>
                 <th>
-                  Quantity
+                  Quantité
                 </th>
                 <th>
-                  Sub Total{{currency()->symbol??''}}
+                  Sous-total{{currency()->symbol??''}}
                 </th>
               </tr>
             </thead>

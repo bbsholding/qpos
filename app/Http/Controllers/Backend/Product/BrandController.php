@@ -40,12 +40,12 @@ class BrandController extends Controller
                     </button>
                     <div class="dropdown-menu" role="menu">
                       <a class="dropdown-item" href="' . route('backend.admin.brands.edit', $data->id) . '" ' . ' >
-                    <i class="fas fa-edit"></i> Edit
+                    <i class="fas fa-edit"></i> Editer
                 </a> <div class="dropdown-divider"></div>
 <form action="' . route('backend.admin.brands.destroy', $data->id) . '"method="POST" style="display:inline;">
                    ' . csrf_field() . '
                     ' . method_field("DELETE") . '
-<button type="submit" class="dropdown-item" onclick="return confirm(\'Are you sure ?\')"><i class="fas fa-trash"></i> Delete</button>
+<button type="submit" class="dropdown-item" onclick="return confirm(\'Etes-vous sûr ?\')"><i class="fas fa-trash"></i> Supprimer</button>
                   </form>
                   </div>';
                 })
@@ -84,7 +84,7 @@ class BrandController extends Controller
             $brand->save();
         }
 
-        return redirect()->route('backend.admin.brands.index')->with('success', 'Brand created successfully!');
+        return redirect()->route('backend.admin.brands.index')->with('success', 'Marque créée avec succès!');
     }
 
     /**
@@ -127,7 +127,7 @@ class BrandController extends Controller
             $this->fileHandler->secureUnlink($oldImage);
         }
 
-        return redirect()->route('backend.admin.brands.index')->with('success', 'Brand updated successfully!');
+        return redirect()->route('backend.admin.brands.index')->with('success', 'Marque mise à jour avec succès!');
     }
 
     /**
@@ -141,6 +141,6 @@ class BrandController extends Controller
             $this->fileHandler->secureUnlink($brand->image);
         }
         $brand->delete();
-        return redirect()->back()->with('success', 'Brand Deleted Successfully');
+        return redirect()->back()->with('success', 'Marque supprimée avec succès');
     }
 }
