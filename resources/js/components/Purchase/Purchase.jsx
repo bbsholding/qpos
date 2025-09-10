@@ -67,14 +67,14 @@ export default function Purchase() {
             setDiscount(purchaseData?.discount_value);
             setShipping(purchaseData?.shipping);
         } catch (error) {
-            console.error("Error fetching products:", error);
+            console.error("Erreur lors de la récupération des produits :", error);
         } finally {
         }
     }, [purchaseId]);
 
     const getProducts = useCallback(async () => {
         if (!searchTerm.trim()) {
-            console.log("Search term is empty");
+            console.log("Le terme de recherche est vide.");
             return;
         }
 
@@ -124,7 +124,7 @@ export default function Purchase() {
                 });
             }
         } catch (error) {
-            console.error("Error fetching products:", error);
+            console.error("Erreur lors de la récupération des produits :", error);
         } finally {
             // Optional: Uncomment if you want to hide loading state
             // setLoading(false);
@@ -212,20 +212,20 @@ export default function Purchase() {
             return;
         }
         if (!date) {
-            toast.error("Please select purchase date.");
+            toast.error("Veuillez sélectionner une date d'achat.");
             return;
         }
         if (!supplierId) {
-            toast.error("Please select a supplier.");
+            toast.error("Veuillez sélectionner un fournisseur.");
             return;
         }
 
         // Show confirmation dialog
         Swal.fire({
-            title: `Are you sure you want to save this purchase?`,
+            title: `Êtes-vous sûr de vouloir enregistrer cet achat ?`,
             showDenyButton: true,
-            confirmButtonText: "Yes",
-            denyButtonText: "No",
+            confirmButtonText: "Oui",
+            denyButtonText: "Non",
             customClass: {
                 actions: "my-actions",
                 cancelButton: "order-1 right-gap",
@@ -252,7 +252,7 @@ export default function Purchase() {
                     window.location.href = "/admin/purchase";
                 } catch (err) {
                     toast.error(
-                        err.response?.data?.message || "An error occurred"
+                        err.response?.data?.message || "Une erreur s'est produite"
                     );
                 }
             }
@@ -276,7 +276,7 @@ export default function Purchase() {
                 const productsData = res.data;
                 setSearchResults(productsData?.data || []);
             } catch (error) {
-                console.error("Error fetching products:", error);
+                console.error("Erreur lors de la récupération des produits :", error);
             }
         }
         // Call the async function inside useEffect
@@ -325,14 +325,14 @@ export default function Purchase() {
                         <div className="row">
                             <div className="mb-3 col-md-6">
                                 <label htmlFor="date" className="form-label">
-                                    Purchase Date
+                                    Date d'achat
                                     <span className="text-danger">*</span>
                                 </label>
                                 <div>
                                     <DatePicker
                                         name="date"
                                         className="form-control"
-                                        placeholderText="Enter purchase date"
+                                        placeholderText="Entrer la date d'achat"
                                         selected={date}
                                         dateFormat="yyyy-MM-dd"
                                         onChange={(date) => {
@@ -351,7 +351,7 @@ export default function Purchase() {
                                     htmlFor="supplier"
                                     className="form-label"
                                 >
-                                    Supplier
+                                    Fournisseur
                                     <span className="text-danger">*</span>
                                 </label>
                                 <Suppliers
@@ -378,13 +378,13 @@ export default function Purchase() {
                                     onChange={(e) =>
                                         setSearchTerm(e.target.value)
                                     }
-                                    placeholder="Enter product barcode/name"
+                                    placeholder="Entrer le nom/code-barres du produit"
                                 />
                                 <button
                                     className="btn bg-gradient-primary ml-2"
                                     onClick={handleSearchAdd}
                                 >
-                                    Add Product
+                                    Ajouter un produit
                                 </button>
                             </div>
                         </div>
@@ -422,11 +422,11 @@ export default function Purchase() {
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Product Name</th>
-                                            <th>Purchase Price</th>
-                                            <th>Current Stock</th>
-                                            <th>Qty</th>
-                                            <th>Sub Total</th>
+                                            <th>Nom</th>
+                                            <th>Prix d'achat</th>
+                                            <th>Stock actuel</th>
+                                            <th>Qté</th>
+                                            <th>Sous-total</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -480,7 +480,7 @@ export default function Purchase() {
                                                             )
                                                         }
                                                     >
-                                                        Delete
+                                                        Supprimer
                                                     </button>
                                                 </td>
                                             </tr>
@@ -496,25 +496,25 @@ export default function Purchase() {
                                     <table className="table table-sm">
                                         <tbody>
                                             <tr>
-                                                <th>Subtotal:</th>
+                                                <th>Sous-total:</th>
                                                 <td className="text-right">
                                                     {totals.subTotal.toFixed(2)}
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th>Tax:</th>
+                                                <th>Taxe :</th>
                                                 <td className="text-right">
                                                     {totals.tax.toFixed(2)}
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th>Discount:</th>
+                                                <th>Remise:</th>
                                                 <td className="text-right">
                                                     {totals.discount.toFixed(2)}
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th>Shipping:</th>
+                                                <th>Livraison:</th>
                                                 <td className="text-right">
                                                     {totals.shipping.toFixed(2)}
                                                 </td>
@@ -539,7 +539,7 @@ export default function Purchase() {
                         <div className="row">
                             <div className="mb-3 col-md-4">
                                 <label htmlFor="tax" className="form-label">
-                                    Tax
+                                    Taxe
                                 </label>
                                 <input
                                     type="number"
@@ -549,7 +549,7 @@ export default function Purchase() {
                                     onChange={(e) =>
                                         setTax(parseFloat(e.target.value) || 0)
                                     }
-                                    placeholder="Enter tax"
+                                    placeholder="Entrer la taxe"
                                     name="tax"
                                     required
                                 />
@@ -559,7 +559,7 @@ export default function Purchase() {
                                     htmlFor="discount"
                                     className="form-label"
                                 >
-                                    Discount
+                                    Remise
                                 </label>
                                 <input
                                     type="number"
@@ -571,7 +571,7 @@ export default function Purchase() {
                                             parseFloat(e.target.value) || 0
                                         )
                                     }
-                                    placeholder="Enter discount"
+                                    placeholder="Entrer la remise"
                                     name="discount"
                                     required
                                 />
@@ -581,7 +581,7 @@ export default function Purchase() {
                                     htmlFor="shipping"
                                     className="form-label"
                                 >
-                                    Shipping Charge
+                                    Frais de livraison
                                 </label>
                                 <input
                                     type="number"
@@ -606,7 +606,7 @@ export default function Purchase() {
                     className="btn btn-md bg-gradient-primary"
                     onClick={handleSubmit}
                 >
-                    Create
+                    Créer un achat
                 </button>
             </div>
 

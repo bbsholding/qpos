@@ -100,18 +100,23 @@ export default function Pos() {
         setDue(dueAmount?.toFixed(2));
     }, [orderDiscount, paid, total]);
     useEffect(() => {
+        setProducts([]);
         if (searchQuery) {
-            setProducts([]);
             getProducts(searchQuery, currentPage, "");
+        } else {
+            getProducts("", 1, "");
         }
         setSearchBarcode("");
     }, [currentPage, searchQuery]);
 
     useEffect(() => {
+        setProducts([]);
         if (searchBarcode) {
-            setProducts([]);
-           getProducts("", currentPage, searchBarcode);
+            getProducts("", currentPage, searchBarcode);
+        } else {
+            getProducts("", 1, "");
         }
+        setSearchQuery("");
     }, [searchBarcode]);
 
     // Infinite scroll logic

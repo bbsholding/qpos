@@ -39,10 +39,10 @@ export default function Cart({ carts, setCartUpdated, cartUpdated }) {
     }
     function destroy(id) {
         Swal.fire({
-            title: "Are you sure you want to delete this item?",
+            title: "Et vous êtes sûr de vouloir supprimer cet article ?",
             showDenyButton: true,
-            confirmButtonText: "Yes",
-            denyButtonText: "No",
+            confirmButtonText: "Oui",
+            denyButtonText: "Non",
             customClass: {
                 actions: "my-actions",
                 cancelButton: "order-1 right-gap",
@@ -78,10 +78,10 @@ export default function Cart({ carts, setCartUpdated, cartUpdated }) {
                             <table className="table table-striped">
                                 <thead>
                                     <tr className="text-center">
-                                        <th>Name</th>
-                                        <th>Quantity</th>
+                                        <th>Nom</th>
+                                        <th>Quantité</th>
                                         <th></th>
-                                        <th>Price</th>
+                                        <th>Prix</th>
                                         <th>Total</th>
                                     </tr>
                                 </thead>

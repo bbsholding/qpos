@@ -33,7 +33,7 @@ const CustomerSelect = ({ setCustomerId }) => {
                 setSelectedCustomer(newOption);
             })
             .catch((error) => {
-                console.error("Error creating customer:", error);
+                console.error("Erreur lors de la création du client :", error);
             });
     };
 
@@ -48,7 +48,7 @@ const CustomerSelect = ({ setCustomerId }) => {
             onChange={handleChange}
             onCreateOption={handleCreateCustomer} // Handle creating a new customer
             value={selectedCustomer}
-            placeholder="Select or create customer"
+            placeholder="Sélectionnez ou créez un client"
         />
     );
 };

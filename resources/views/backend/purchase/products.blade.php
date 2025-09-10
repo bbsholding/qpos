@@ -61,19 +61,19 @@
         <div class="table-responsive">
           <table class="table">
             <tr>
-              <th style="width:50%">Subtotal:</th>
+              <th style="width:50%">Sous-total:</th>
               <td class="text-right">{{number_format($purchase->sub_total,2,'.',',')}}</td>
             </tr>
             <tr>
-              <th>Tax:</th>
+              <th>Taxe:</th>
               <td class="text-right">{{number_format($purchase->tax,2,'.',',')}}</td>
             </tr>
             <tr>
-              <th>Discount:</th>
+              <th>Remise:</th>
               <td class="text-right">{{number_format($purchase->discount_value,2,'.',',')}}</td>
             </tr>
             <tr>
-              <th>Shipping:</th>
+              <th>Frais de livraison:</th>
               <td class="text-right">{{number_format($purchase->shipping,2,'.',',')}}</td>
             </tr>
             <tr>
