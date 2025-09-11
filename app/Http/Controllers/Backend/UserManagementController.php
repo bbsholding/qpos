@@ -41,36 +41,36 @@ class UserManagementController extends Controller
                     <a class="btn btn-sm bg-gradient-primary"
                         href="{{ route(\'backend.admin.user.edit\', $id) }}">
                         <i class="fas fa-edit"></i>
-                        Edit
+                        Editer
                     </a>
                     <a class="btn btn-sm bg-gradient-danger"
                         href="{{ route(\'backend.admin.user.delete\', $id) }}"
-                        onclick="return confirm(\'Are you sure ?\')">
+                        onclick="return confirm(\'Etes vous sûre ?\')">
                         <i class="fas fa-trash-alt"></i>
-                        Delete
+                        Supp
                     </a>
                     @if ($is_suspended)
                         <a class="btn btn-sm bg-gradient-success"
                             href="{{ route(\'backend.admin.user.suspend\', [\'id\' => $id, \'status\' => 0]) }}">
                             <i class="fas fa-check-square"></i>
-                            Activate
+                            Activer
                         </a>
                     @else
                         <a class="btn btn-sm bg-gradient-warning"
                             href="{{ route(\'backend.admin.user.suspend\', [\'id\' => $id, \'status\' => 1]) }}"
-                            onclick="return confirm(\'Are you sure ?\')">
+                            onclick="return confirm(\'Etes vous sûre ?\')">
                             <i class="far fa-times-circle"></i>
-                            Suspend
+                            Désact
                         </a>
                     @endif
-                    
+
                 </div>'
                 )
                 ->addColumn('suspend', function ($data) {
                     if ($data->is_suspended == 0) {
-                        return '<span class="badge badge-pill badge-success">Active</span>';
+                        return '<span class="badge badge-pill badge-success">Actif</span>';
                     } else {
-                        return '<span class="badge badge-pill badge-danger">Suspended</span>';
+                        return '<span class="badge badge-pill badge-danger">Désactivé</span>';
                     }
                 })
                 ->addColumn('roles', function ($data) {
@@ -103,12 +103,12 @@ class UserManagementController extends Controller
         $user = User::findOrFail($id);
 
         if ($user->is_suspended == $status) {
-            return back()->with('error', 'User already suspended');
+            return back()->with('error', 'Utilisateur déjà désactivé');
         } else {
             $user->is_suspended = $status;
             $user->save();
 
-            return back()->with('success', 'User suspended successfully');
+            return back()->with('success', 'Utilisateur désactivé avec succès');
         }
     }
 
@@ -139,7 +139,7 @@ class UserManagementController extends Controller
             $role = Role::find($request->role);
             $newUser->syncRoles($role);
 
-            return to_route('backend.admin.users')->with('success', 'User added successfully');
+            return to_route('backend.admin.users')->with('success', 'Utilisateur ajouté avec succès');
         } else {
             $roles = Role::all();
             return view('backend.users.create', compact('roles'));
@@ -184,8 +184,8 @@ class UserManagementController extends Controller
 
             $role = Role::find($request->role);
             $user->syncRoles($role);
-            
-            return to_route('backend.admin.users')->with('success', 'User updated successfully');
+
+            return to_route('backend.admin.users')->with('success', 'Utilisateur mis à jour avec succès');
         } else {
             if ($id == auth()->id()) {
                 return to_route('backend.admin.profile');
@@ -210,6 +210,6 @@ class UserManagementController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return back()->with('success', 'User deleted successfully');
+        return back()->with('success', 'Utilisateur supprimé avec succès');
     }
 }

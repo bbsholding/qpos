@@ -37,7 +37,7 @@ export default function Pos() {
                     params: { search, page, barcode },
                 });
                 const productsData = res.data;
-                setProducts((prev) => [...prev, ...productsData.data]); // Append new products
+                setProducts(productsData.data); // Remplace la liste par celle retournée
                 if (productsData.data.length === 1 && barcode != "") {
                     addProductToCart(productsData.data[0].id);
                     getCarts();
@@ -157,10 +157,10 @@ export default function Pos() {
             return;
         }
         Swal.fire({
-            title: "Are you sure you want to delete Cart?",
+            title: "Êtes-vous sûr de vouloir supprimer le panier ?",
             showDenyButton: true,
-            confirmButtonText: "Yes",
-            denyButtonText: "No",
+            confirmButtonText: "Oui",
+            denyButtonText: "Non",
             customClass: {
                 actions: "my-actions",
                 cancelButton: "order-1 right-gap",
@@ -190,14 +190,14 @@ export default function Pos() {
             return;
         }
         if (!customerId) {
-            toast.error("Please select customer");
+            toast.error("Veuillez sélectionner un client");
             return;
         }
         Swal.fire({
-            title: `Are you sure you want to complete this order? <br>Due: ${due}`,
+            title: `Êtes-vous sûr de vouloir finaliser cette vente ? <br>À payer : ${due}`,
             showDenyButton: true,
-            confirmButtonText: "Yes",
-            denyButtonText: "No",
+            confirmButtonText: "Oui",
+            denyButtonText: "Non",
             customClass: {
                 actions: "my-actions",
                 cancelButton: "order-1 right-gap",
@@ -282,12 +282,12 @@ export default function Pos() {
                                         </div>
                                     </div>
                                     <div className="row text-bold mb-1">
-                                        <div className="col">Discount:</div>
+                                        <div className="col">Rabais:</div>
                                         <div className="col text-right mr-2">
                                             <input
                                                 type="number"
                                                 className="form-control form-control-sm"
-                                                placeholder="Enter discount"
+                                                placeholder="Entrer le rabais"
                                                 min={0}
                                                 disabled={total <= 0}
                                                 value={orderDiscount}
@@ -308,7 +308,7 @@ export default function Pos() {
                                     </div>
                                     <div className="row text-bold mb-1">
                                         <div className="col">
-                                            Apply Fractional Discount:
+                                            Appliquer le rabais fractionnaire:
                                         </div>
                                         <div className="col text-right mr-2">
                                             <input
@@ -338,12 +338,12 @@ export default function Pos() {
                                         </div>
                                     </div>
                                     <div className="row text-bold mb-1">
-                                        <div className="col">Paid:</div>
+                                        <div className="col">À payer:</div>
                                         <div className="col text-right mr-2">
                                             <input
                                                 type="number"
                                                 className="form-control form-control-sm"
-                                                placeholder="Enter paid"
+                                                placeholder="Entrer le montant payé"
                                                 min={0}
                                                 disabled={total <= 0}
                                                 value={paid}
@@ -363,7 +363,7 @@ export default function Pos() {
                                         </div>
                                     </div>
                                     <div className="row text-bold">
-                                        <div className="col">Due:</div>
+                                        <div className="col">Du:</div>
                                         <div className="col text-right mr-2">
                                             {due}
                                         </div>
@@ -377,7 +377,7 @@ export default function Pos() {
                                         type="button"
                                         className="btn bg-gradient-danger btn-block text-white text-bold"
                                     >
-                                        Clear Cart
+                                        Vider le panier
                                     </button>
                                 </div>
                                 <div className="col">
@@ -388,7 +388,7 @@ export default function Pos() {
                                         type="button"
                                         className="btn bg-gradient-primary btn-block text-white text-bold"
                                     >
-                                        Checkout
+                                        Finaliser la vente
                                     </button>
                                 </div>
                             </div>
@@ -404,7 +404,7 @@ export default function Pos() {
                                     <input
                                         type="text"
                                         className="form-control"
-                                        placeholder="Enter Product Barcode"
+                                        placeholder="Entrer le code-barres du produit"
                                         value={searchBarcode}
                                         autoFocus
                                         onChange={(e) =>
@@ -416,7 +416,7 @@ export default function Pos() {
                                     <input
                                         type="text"
                                         className="form-control"
-                                        placeholder="Enter Product Name"
+                                        placeholder="Entrer le nom du produit"
                                         value={searchQuery}
                                         onChange={(e) =>
                                             setSearchQuery(e.target.value)
@@ -453,7 +453,7 @@ export default function Pos() {
                                                         {product.quantity})
                                                     </p>
                                                     <p>
-                                                        Price:{" "}
+                                                        Prix:{" "}
                                                         {
                                                             product?.discounted_price
                                                         }
@@ -465,7 +465,7 @@ export default function Pos() {
                             </div>
                             {loading && (
                                 <div className="loading-more">
-                                    Loading more...
+                                    Charger plus...
                                 </div>
                             )}
                         </div>

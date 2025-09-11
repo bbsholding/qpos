@@ -130,7 +130,7 @@ class OrderController extends Controller
         }
 
         $carts = PosCart::where('user_id', auth()->id())->delete();
-        return response()->json(['message' => 'Order completed successfully', 'order' => $order], 200);
+        return response()->json(['message' => 'Commande complétée avec succès', 'order' => $order], 200);
     }
 
     /**

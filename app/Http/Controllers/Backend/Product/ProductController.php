@@ -191,7 +191,7 @@ class ProductController extends Controller
         }
         if ($request->isMethod('post') && $request->hasFile('file')) {
             Excel::import(new ProductsImport, $request->file('file'));
-            return redirect()->back()->with('success', 'Products imported successfully.');
+            return redirect()->back()->with('success', 'Produits importés avec succès.');
         }
         return view('backend.products.import');
     }

@@ -1,6 +1,6 @@
 @extends('backend.master')
 
-@section('title', 'User Management')
+@section('title', 'Gestion des utilisateurs')
 
 @section('content')
 <div class="card">
@@ -8,7 +8,7 @@
     <div class="mt-n5 mb-3 d-flex justify-content-end">
         <a href="{{ route('backend.admin.user.create') }}" class="btn bg-gradient-primary">
             <i class="fas fa-plus-circle"></i>
-            Add New
+            Ajouter un utilisateur
         </a>
     </div>
     @endcan
@@ -20,11 +20,11 @@
                         <thead>
                             <tr>
                                 <th data-orderable="false">#</th>
-                                <th>Name</th>
+                                <th>Nom</th>
                                 <th>Email</th>
-                                <th>Role</th>
-                                <th>Created</th>
-                                <th>Status</th>
+                                <th>Rôle</th>
+                                <th>Créé le</th>
+                                <th>Statut</th>
                                 <th data-orderable="false">
                                     Action
                                 </th>
@@ -51,7 +51,28 @@
             ajax: {
                 url: "{{ route('backend.admin.users') }}"
             },
-
+            language: {
+        "sProcessing":     "Traitement en cours...",
+        "sSearch":        "Rechercher :",
+        "sLengthMenu":    "Afficher _MENU_ éléments",
+        "sInfo":          "Affichage de l'élément _START_ à _END_ sur _TOTAL_ éléments",
+        "sInfoEmpty":     "Affichage de l'élément 0 à 0 sur 0 élément",
+        "sInfoFiltered":  "(filtré de _MAX_ éléments au total)",
+        "sInfoPostFix":   "",
+        "sLoadingRecords": "Chargement en cours...",
+        "sZeroRecords":   "Aucun élément à afficher",
+        "sEmptyTable":    "Aucune donnée disponible dans le tableau",
+        "oPaginate": {
+            "sFirst":      "Premier",
+            "sPrevious":   "Précédent",
+            "sNext":       "Suivant",
+            "sLast":       "Dernier"
+        },
+        "oAria": {
+            "sSortAscending":  ": activer pour trier la colonne par ordre croissant",
+            "sSortDescending": ": activer pour trier la colonne par ordre décroissant"
+        }
+      },
             columns: [{
                     data: 'thumb',
                     name: 'thumb',

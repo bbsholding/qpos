@@ -65,11 +65,11 @@ class CartController extends Controller
 
         // Check if the product is active and has sufficient stock
         if (!$product->status) {
-            return response()->json(['message' => 'Product is not available'], 400);
+            return response()->json(['message' => 'Produit non disponible'], 400);
         }
 
         if ($product->quantity <= 0) {
-            return response()->json(['message' => 'Insufficient stock available'], 400);
+            return response()->json(['message' => 'Stock insuffisant'], 400);
         }
 
         // Fetch the cart item for the current user and product
@@ -80,9 +80,9 @@ class CartController extends Controller
             if ($cartItem->quantity < $product->quantity) {
                 $cartItem->quantity += 1;
                 $cartItem->save();
-                return response()->json(['message' => 'Quantity updated', 'quantity' => $cartItem->quantity], 200);
+                return response()->json(['message' => 'Quantité mise à jour', 'quantity' => $cartItem->quantity], 200);
             } else {
-                return response()->json(['message' => 'Cannot add more, stock limit reached'], 400);
+                return response()->json(['message' => 'Limite de stock atteinte'], 400);
             }
         } else {
             // If not in the cart, create a new cart item
@@ -91,7 +91,7 @@ class CartController extends Controller
             $cart->product_id = $product_id;
             $cart->quantity = 1;
             $cart->save();
-            return response()->json(['message' => 'Product added to cart', 'quantity' => 1], 201);
+            return response()->json(['message' => 'Produit ajouté au panier', 'quantity' => 1], 201);
         }
     }
 
@@ -103,14 +103,14 @@ class CartController extends Controller
 
         $cart = PosCart::with('product')->findOrFail($request->id);
         if ($cart->product->quantity <= 0) {
-            return response()->json(['message' => 'Insufficient stock available'], 400);
+            return response()->json(['message' => 'Stock insuffisant'], 400);
         }
         if ($cart->quantity == $cart->product->quantity) {
-            return response()->json(['message' => 'Cannot add more, stock limit reached'], 400);
+            return response()->json(['message' => 'Limite de stock atteinte'], 400);
         }
         $cart->quantity = $cart->quantity + 1;
         $cart->save();
-        return response()->json(['message' => 'Cart Updated successfully'], 200);
+        return response()->json(['message' => 'Panier mis à jour avec succès'], 200);
     }
     public function decrement(Request $request)
     {
@@ -119,11 +119,11 @@ class CartController extends Controller
         ]);
         $cart = PosCart::findOrFail($request->id);
         if ($cart->quantity <= 1) {
-            return response()->json(['message' => 'Quantity cannot be less than 1.'], 400);
+            return response()->json(['message' => 'La quantité ne peut pas être inférieure à 1.'], 400);
         }
         $cart->quantity = $cart->quantity - 1;
         $cart->save();
-        return response()->json(['message' => 'Cart Updated successfully'], 200);
+        return response()->json(['message' => 'Panier mis à jour avec succès'], 200);
     }
     public function delete(Request $request)
     {
@@ -134,16 +134,16 @@ class CartController extends Controller
         $cart = PosCart::findOrFail($request->id);
         $cart->delete();
 
-        return response()->json(['message' => 'Item successfully deleted'], 200);
+        return response()->json(['message' => 'Article supprimé avec succès'], 200);
     }
     public function empty()
     {
         $deletedCount = PosCart::where('user_id', auth()->id())->delete();
 
         if ($deletedCount > 0) {
-            return response()->json(['message' => 'Cart successfully cleared'], 200);
+            return response()->json(['message' => 'Panier vidé avec succès'], 200);
         }
 
-        return response()->json(['message' => 'Cart is already empty'], 204);
+        return response()->json(['message' => 'Le panier est déjà vide'], 204);
     }
 }
