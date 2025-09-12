@@ -1,6 +1,6 @@
 @extends('backend.master')
 
-@section('title', 'Inventory Report')
+@section('title', 'Rapport d\'inventaire')
 
 @section('content')
 <div class="card">
@@ -66,6 +66,35 @@
         url: "{{ route('backend.admin.inventory.report') }}"
       },
       lengthChange: true,
+      language: {
+        "sProcessing": "Traitement en cours...",
+        "sSearch": "Rechercher :",
+        "sLengthMenu": "Afficher _MENU_ éléments",
+        "sInfo": "Affichage de l'élément _START_ à _END_ sur _TOTAL_ éléments",
+        "sInfoEmpty": "Affichage de l'élément 0 à 0 sur 0 élément",
+        "sInfoFiltered": "(filtré à partir de _MAX_ éléments au total)",
+        "sInfoPostFix": "",
+        "sLoadingRecords": "Chargement en cours...",
+        "sZeroRecords": "Aucun élément à afficher",
+        "sEmptyTable": "Aucune donnée disponible dans le tableau",
+        "oPaginate": {
+          "sFirst": "Premier",
+          "sPrevious": "Précédent",
+          "sNext": "Suivant",
+          "sLast": "Dernier"
+        },
+        "oAria": {
+          "sSortAscending": ": activer pour trier la colonne par ordre croissant",
+          "sSortDescending": ": activer pour trier la colonne par ordre décroissant"
+        },
+        buttons: {
+          copyTitle: 'Données copiées',
+          copySuccess: {
+            _: '%d lignes copiées',
+            1: '1 ligne copiée'
+          }
+        }
+      },
       columns: [{
           data: 'DT_RowIndex',
           name: 'DT_RowIndex'
@@ -89,17 +118,17 @@
       dom: 'lBfrtip', // Enables the buttons
       buttons: [{
           extend: 'excel',
-          text: 'Export to Excel',
+          text: 'Export vert Excel',
           className: 'btn'
         },
         {
           extend: 'pdf',
-          text: 'Export to PDF',
+          text: 'Export vers PDF',
           className: 'btn'
         },
         {
           extend: 'print',
-          text: 'Print',
+          text: 'Imprimer',
           className: 'btn'
         }
       ],

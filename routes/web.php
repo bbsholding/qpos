@@ -1,3 +1,4 @@
+
 <?php
 
 use App\Http\Controllers\Backend\CurrencyController;
@@ -22,6 +23,7 @@ use App\Http\Controllers\Backend\Product\UnitController;
 use App\Http\Controllers\Backend\UserManagementController;
 use App\Http\Controllers\Backend\WebsiteSettingController;
 use App\Models\Supplier;
+use App\Http\Controllers\Backend\CashRegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,6 +99,13 @@ Route::prefix('admin')->as('backend.admin.')->middleware(['admin'])->group(funct
     Route::put('/order/create', [OrderController::class, 'store']);
     Route::get('/get/customers',[CustomerController::class,'getCustomers']);
     Route::post('/create/customers', [CustomerController::class, 'store']);
+    // Fermeture de caisse
+    Route::post('/cash-register/close', [CashRegisterController::class, 'close'])->name('cash_register.close');
+    // Ouverture de caisse
+    Route::post('/cash-register/open', [CashRegisterController::class, 'open'])->name('cash_register.open');
+    // Statut de la caisse
+    Route::get('/cash-register/status', [CashRegisterController::class, 'status'])->name('cash_register.status');
+
     //end pos
     Route::get('profile', [DashboardController::class, 'profile'])->name('profile');
     Route::post('profile/update', [AuthController::class, 'update'])->name('profile.update');

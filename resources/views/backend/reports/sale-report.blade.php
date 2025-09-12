@@ -1,6 +1,6 @@
 @extends('backend.master')
 
-@section('title', 'Sale Report')
+@section('title', 'Rapport de Vente')
 
 @section('content')
 <div class="card">
@@ -8,7 +8,7 @@
     <div class="form-group">
       <div class="input-group">
         <button type="button" class="btn btn-default float-right" id="daterange-btn">
-          <i class="far fa-calendar-alt"></i> Filter by date
+          <i class="far fa-calendar-alt"></i> Filtrer par date
           <i class="fas fa-caret-down"></i>
         </button>
       </div>
@@ -26,7 +26,7 @@
               <!-- /.col -->
               <div class="col-sm-4">
                 <address>
-                  <strong>Sale Report ({{$start_date}} - {{$end_date}})</strong><br>
+                  <strong>Rapport de Vente ({{$start_date}} - {{$end_date}})</strong><br>
                 </address>
               </div>
               <!-- /.col -->
@@ -43,16 +43,16 @@
                   <thead>
                     <tr>
                       <th data-orderable="false">#</th>
-                      <th>SaleId</th>
-                      <th>Customer</th>
+                      <th>ID Vente</th>
+                      <th>Client</th>
                       <th>Date</th>
-                      <th>Item</th>
-                      <th>Sub Total {{currency()->symbol??''}}</th>
-                      <th>Discount {{currency()->symbol??''}}</th>
+                      <th>Article</th>
+                      <th>Sous-total {{currency()->symbol??''}}</th>
+                      <th>Remise {{currency()->symbol??''}}</th>
                       <th>Total {{currency()->symbol??''}}</th>
-                      <th>Paid {{currency()->symbol??''}}</th>
-                      <th>Due {{currency()->symbol??''}}</th>
-                      <th>Status</th>
+                      <th>Payé {{currency()->symbol??''}}</th>
+                      <th>Reste {{currency()->symbol??''}}</th>
+                      <th>Statut</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -70,15 +70,15 @@
                       <td>{{number_format($order->due,2,'.',',')}}</td>
                       <td>
                         @if ($order->status)
-                        Paid
+                        Payé
                         @else
-                        Due
+                        Reste
                         @endif
                       </td>
                     </tr>
                     @empty
                     <tr>
-                      <td colspan="7" class="text-center">No sells found.</td>
+                      <td colspan="11" class="text-center">Aucune vente trouvée.</td>
                     </tr>
                     @endforelse
                   </tbody>
@@ -89,7 +89,7 @@
             <!-- /.row -->
             <div class="row no-print">
               <div class="col-12">
-                <button type="button" onclick="window.print()" class="btn btn-success float-right"><i class="fas fa-print"></i> Print</a>
+                <button type="button" onclick="window.print()" class="btn btn-success float-right"><i class="fas fa-print"></i> Imprimer</a>
                 </button>
               </div>
             </div>
@@ -112,35 +112,35 @@
 @push('script')
 <script>
   $(function() {
-    // Extract start and end dates from URL parameters
+    // Extraire les dates de début et de fin des paramètres URL
     const urlParams = new URLSearchParams(window.location.search);
-    const startDate = urlParams.get('start_date') || moment().subtract(29, 'days').format('YYYY-MM-DD'); // Default to last 30 days if not present
-    const endDate = urlParams.get('end_date') || moment().format('YYYY-MM-DD'); // Default to today if not present
+    const startDate = urlParams.get('start_date') || moment().subtract(29, 'days').format('YYYY-MM-DD'); // Par défaut, les 30 derniers jours
+    const endDate = urlParams.get('end_date') || moment().format('YYYY-MM-DD'); // Par défaut, aujourd'hui
 
-    // Initialize the date range picker
+    // Initialiser le sélecteur de plage de dates
     $('#daterange-btn').daterangepicker({
         ranges: {
-          'Today': [moment(), moment()],
-          'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-          'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-          'This Month': [moment().startOf('month'), moment().endOf('month')],
-          'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+          'Aujourd\'hui': [moment(), moment()],
+          'Hier': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+          '7 derniers jours': [moment().subtract(6, 'days'), moment()],
+          '30 derniers jours': [moment().subtract(29, 'days'), moment()],
+          'Ce mois-ci': [moment().startOf('month'), moment().endOf('month')],
+          'Mois dernier': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
         },
         startDate: moment(startDate, "YYYY-MM-DD"),
         endDate: moment(endDate, "YYYY-MM-DD")
       },
       function(start, end) {
-        // Update the button text with the selected range
-        $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        // Mettre à jour le texte du bouton avec la plage sélectionnée
+        $('#daterange-btn span').html(start.format('D MMMM YYYY') + ' - ' + end.format('D MMMM YYYY'));
 
-        // Redirect with selected start and end dates
+        // Rediriger avec les dates sélectionnées
         window.location.href = '{{ route("backend.admin.sale.report") }}?start_date=' + start.format('YYYY-MM-DD') + '&end_date=' + end.format('YYYY-MM-DD');
       }
     );
 
-    // Set the initial display text for the date range button
-    $('#daterange-btn span').html(moment(startDate, "YYYY-MM-DD").format('MMMM D, YYYY') + ' - ' + moment(endDate, "YYYY-MM-DD").format('MMMM D, YYYY'));
+    // Afficher la plage de dates initiale sur le bouton
+    $('#daterange-btn span').html(moment(startDate, "YYYY-MM-DD").format('D MMMM YYYY') + ' - ' + moment(endDate, "YYYY-MM-DD").format('D MMMM YYYY'));
   });
 </script>
 @endpush

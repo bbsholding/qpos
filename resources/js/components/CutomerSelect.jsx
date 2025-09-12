@@ -4,7 +4,7 @@ import axios from "axios";
 
 const CustomerSelect = ({ setCustomerId }) => {
     const [customers, setCustomers] = useState([]);
-    const [selectedCustomer, setSelectedCustomer] = useState({value:1,label:"Walking Customer"});
+    const [selectedCustomer, setSelectedCustomer] = useState({value:1,label:"Client Ambulant"});
 
     // Fetch existing customers from the backend
     useEffect(() => {

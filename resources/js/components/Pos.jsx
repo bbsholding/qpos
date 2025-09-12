@@ -2,6 +2,7 @@ import React, {useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Cart from "./Cart";
+import CashRegisterModal from "./CashRegisterModal";
 import toast, { Toaster } from "react-hot-toast";
 import CustomerSelect from "./CutomerSelect";
 
@@ -11,6 +12,10 @@ import playSound from "../utils/playSound";
 
 export default function Pos() {
     const [products, setProducts] = useState([]);
+    // Etat pour le modal caisse
+    const [isCashModalOpen, setIsCashModalOpen] = useState(false);
+    const [cashModalType, setCashModalType] = useState("open");
+    const [cashRegisterOpen, setCashRegisterOpen] = useState(null); // null = inconnu, false = pas ouvert, objet = ouvert
     const [carts, setCarts] = useState([]);
     const [orderDiscount, setOrderDiscount] = useState(0);
     const [paid, setPaid] = useState(0);
@@ -62,6 +67,24 @@ export default function Pos() {
         }
     }, []);
     useEffect(() => {
+        // Vérifier l'état de la caisse au chargement
+        const checkCashRegister = async () => {
+            try {
+                const res = await axios.get("/admin/cash-register/status");
+                if (res.data.status === "open") {
+                    setCashRegisterOpen(res.data.cash_register);
+                } else {
+                    setCashRegisterOpen(false);
+                    setCashModalType("open");
+                    setIsCashModalOpen(true);
+                }
+            } catch (err) {
+                setCashRegisterOpen(false);
+                setCashModalType("open");
+                setIsCashModalOpen(true);
+            }
+        };
+        checkCashRegister();
         getUpdatedProducts();
     }, [productUpdated]);
 
@@ -229,21 +252,58 @@ export default function Pos() {
     }
     return (
         <>
+            {/* Modal caisse affiché uniquement si aucune caisse n'est ouverte */}
+            {cashRegisterOpen === false && (
+                <CashRegisterModal
+                    isOpen={isCashModalOpen}
+                    onClose={() => setIsCashModalOpen(false)}
+                    type={cashModalType}
+                    onSuccess={(data) => {
+                        toast.success(
+                            cashModalType === "open"
+                                ? "Caisse ouverte avec succès"
+                                : "Caisse fermée avec succès"
+                        );
+                        if (cashModalType === "open") {
+                            setIsCashModalOpen(false);
+                            setCashRegisterOpen(data);
+                        } else {
+                            setCashRegisterOpen(false);
+                        }
+                    }}
+                />
+            )}
+            {/* Bouton fermeture visible uniquement si caisse ouverte */}
+            {cashRegisterOpen && (
+                <>
+                    <div className="mb-3 d-flex gap-2">
+                        <button
+                            className="btn btn-danger"
+                            onClick={() => {
+                                setCashModalType("close");
+                                setIsCashModalOpen(true);
+                            }}
+                        >
+                            Fermer la caisse
+                        </button>
+                    </div>
+                    {/* Modal fermeture caisse */}
+                    {isCashModalOpen && cashModalType === "close" && (
+                        <CashRegisterModal
+                            isOpen={isCashModalOpen}
+                            onClose={() => setIsCashModalOpen(false)}
+                            type="close"
+                            onSuccess={(data) => {
+                                toast.success("Caisse fermée avec succès");
+                                setCashRegisterOpen(false);
+                            }}
+                        />
+                    )}
+
+
+
             <div className="card">
-                {/* <div class="mt-n5 mb-3 d-flex justify-content-end">
-                    <a
-                        href="/admin"
-                        className="btn bg-gradient-primary mr-2"
-                    >
-                        Dashboard
-                    </a>
-                    <a
-                        href="/admin/ordersma"
-                        className="btn bg-gradient-primary"
-                    >
-                        Orders
-                    </a>
-                </div> */}
+
 
                 <div className="card-body p-2 p-md-4 pt-0">
                     <div className="row">
@@ -254,19 +314,6 @@ export default function Pos() {
                                         setCustomerId={setCustomerId}
                                     />
                                 </div>
-                                {/* <div className="col-6">
-                                <form className="form">
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        placeholder="Enter barcode"
-                                        value={searchQuery}
-                                        onChange={(e) =>
-                                            setSearchQuery(e.target.value)
-                                        }
-                                    />
-                                </form>
-                            </div> */}
                             </div>
                             <Cart
                                 carts={carts}
@@ -472,6 +519,9 @@ export default function Pos() {
                     </div>
                 </div>
             </div>
+            </>
+            )}
+
             <Toaster position="top-right" reverseOrder={false} />
         </>
     );

@@ -25,12 +25,12 @@ class StartUpSeeder extends Seeder
             'username' => uniqid()
         ]);
         Customer::create([
-            'name' => "Walking Customer",
-            'phone' => "012345678",
+            'name' => "Client Ambulant",
+            'phone' => "password",
         ]);
         Supplier::create([
-            'name' => "Own Supplier",
-            'phone' => "012345678",
+            'name' => "Propre Fournisseur",
+            'phone' => "password",
         ]);
         $role = Role::create(['name' => 'Admin']);
         $user->syncRoles($role);
