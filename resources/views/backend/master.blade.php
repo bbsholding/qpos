@@ -7,6 +7,9 @@
     <title>
         @yield('title', 'Dashboard') | {{ readConfig('site_name') }}
     </title>
+    <script>
+        const BASE_URL = "{{ env('BASE_URL') }}";
+    </script>
 
     <!-- FAVICON ICON -->
     <link rel="shortcut icon" href="{{ assetImage(readconfig('favicon_icon')) }}" type="image/svg+xml">

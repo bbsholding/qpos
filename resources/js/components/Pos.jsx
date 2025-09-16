@@ -31,14 +31,12 @@ export default function Pos() {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [loading, setLoading] = useState(false);
-    const fullDomainWithPort = `${protocol}//${hostname}${
-        port ? `:${port}` : ""
-    }`;
+    const fullDomainWithPort = `${BASE_URL}`;
     const getProducts = useCallback(
         async (search = "", page = 1, barcode = "") => {
             setLoading(true);
             try {
-                const res = await axios.get('/admin/get/products', {
+                const res = await axios.get(`${BASE_URL}/admin/get/products`, {
                     params: { search, page, barcode },
                 });
                 const productsData = res.data;
@@ -58,7 +56,7 @@ export default function Pos() {
     );
     const getUpdatedProducts = useCallback(async () => {
         try {
-            const res = await axios.get('/admin/get/products');
+            const res = await axios.get(`${BASE_URL}/admin/get/products`);
             const productsData = res.data;
             setProducts(productsData.data);
             setTotalPages(productsData.meta.last_page); // Get total pages
@@ -70,7 +68,7 @@ export default function Pos() {
         // Vérifier l'état de la caisse au chargement
         const checkCashRegister = async () => {
             try {
-                const res = await axios.get("/admin/cash-register/status");
+                const res = await axios.get(`${BASE_URL}/admin/cash-register/status`);
                 if (res.data.status === "open") {
                     setCashRegisterOpen(res.data.cash_register);
                 } else {
@@ -90,7 +88,7 @@ export default function Pos() {
 
     const getCarts = async () => {
         try {
-            const res = await axios.get('/admin/cart');
+            const res = await axios.get(`${BASE_URL}/admin/cart`);
             const data = res.data;
             setTotal(data?.total);
             setUpdateTotal(data?.total - orderDiscount);
@@ -164,7 +162,7 @@ export default function Pos() {
 
     function addProductToCart(id) {
         axios
-            .post("/admin/cart", { id })
+            .post(`${BASE_URL}/admin/cart`, { id })
             .then((res) => {
                 setCartUpdated(!cartUpdated);
                 playSound(SuccessSound);
@@ -193,7 +191,7 @@ export default function Pos() {
         }).then((result) => {
             if (result.isConfirmed) {
                 axios
-                    .put("/admin/cart/empty")
+                    .put(`${BASE_URL}/admin/cart/empty`)
                     .then((res) => {
                         setCartUpdated(!cartUpdated);
                         playSound(SuccessSound);
@@ -230,7 +228,7 @@ export default function Pos() {
         }).then((result) => {
             if (result.isConfirmed) {
                 axios
-                    .put("/admin/order/create", {
+                    .put(`${BASE_URL}/admin/order/create`, {
                         customer_id: customerId,
                         order_discount: parseFloat(orderDiscount) || 0,
                         paid: parseFloat(paid) || 0,

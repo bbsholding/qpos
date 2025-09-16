@@ -1,5 +1,5 @@
 @extends('backend.master')
-@section('title', 'Receipt_'.$order->id)
+@section('title', 'Reçu_'.$order->id)
 @section('content')
 
 <div class="card">
@@ -16,23 +16,23 @@
       @if(readConfig('is_show_phone_invoice')){{ readConfig('contact_phone') }}<br>@endif
       @if(readConfig('is_show_email_invoice')){{ readConfig('contact_email') }}<br>@endif
     </div>
-    {{ 'User: '.auth()->user()->name}}<br>
-    {{ 'Order: #'.$order->id}}<br>
+    {{ 'Caissier : '.auth()->user()->name}}<br>
+    {{ 'Vente : #'.$order->id}}<br>
     <hr>
     <div class="row justify-content-between mx-auto">
       <div class="text-left">
         @if(readConfig('is_show_customer_invoice'))
         <address>
-          Name: {{ $order->customer->name ?? 'N/A' }}<br>
-          Address: {{ $order->customer->address ?? 'N/A' }}<br>
-          Phone: {{ $order->customer->phone ?? 'N/A' }}
+          Nom : {{ $order->customer->name ?? 'N/A' }}<br>
+          Adresse : {{ $order->customer->address ?? 'N/A' }}<br>
+          Téléphone : {{ $order->customer->phone ?? 'N/A' }}
         </address>
         @endif
       </div>
       <div class="text-right">
         <address class="text-right">
-          <p>{{ date('d-M-Y') }}</p>
-          <p>{{ date('h:i:s A') }}</p>
+          <p>{{ date('d-m-Y') }}</p>
+          <p>{{ date('H:i:s') }}</p>
         </address>
       </div>
     </div>
@@ -40,10 +40,8 @@
     <table style="width: 100%;">
       <thead>
         <tr>
-          <th style="text-align: left;">Product</th>
+          <th style="text-align: left;">Produit</th>
           <th style="text-align: right;"></th>
-          <!-- <th style="text-align: right;">Qty</th> -->
-          <!-- <th style="text-align: right;">Price {{ currency()->symbol}}</th> -->
           <th style="text-align: right;">Total {{ currency()->symbol}}</th>
         </tr>
       </thead>
@@ -51,7 +49,6 @@
         @foreach ($order->products as $item)
         <tr>
           <td>{{ $item->product->name }}</td>
-          <!-- <td class="text-right">{{ $item->quantity }}</td> -->
           <td class="text-right">{{ $item->quantity }}*{{ $item->discounted_price}}</td>
           <td class="text-right">{{ $item->total }}</td>
         </tr>
@@ -62,23 +59,23 @@
     <div class="summary">
       <table style="width: 100%;">
         <tr>
-          <td>Subtotal:</td>
+          <td>Sous-total :</td>
           <td class="text-right">{{number_format($order->sub_total, 2) }}</td>
         </tr>
         <tr>
-          <td>Discount:</td>
+          <td>Remise :</td>
           <td class="text-right">{{number_format($order->discount, 2) }}</td>
         </tr>
         <tr>
-          <td><strong>Total:</strong></td>
+          <td><strong>Total :</strong></td>
           <td class="text-right"><strong>{{number_format($order->total, 2) }}</strong></td>
         </tr>
         <tr>
-          <td>Paid:</td>
+          <td>Payé :</td>
           <td class="text-right">{{number_format($order->paid, 2) }}</td>
         </tr>
         <tr>
-          <td>Due:</td>
+          <td>Reste :</td>
           <td class="text-right">{{number_format($order->due, 2) }}</td>
         </tr>
       </table>
@@ -91,7 +88,7 @@
 
   <!-- Print Button -->
   <div class="text-center mt-3 no-print pb-3">
-    <button type="button" onclick="window.print()" class="btn bg-gradient-primary text-white"><i class="fas fa-print"></i> Print</button>
+    <button type="button" onclick="window.print()" class="btn bg-gradient-primary text-white"><i class="fas fa-print"></i> Imprimer</button>
   </div>
 </div>
 @endsection

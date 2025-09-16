@@ -45,7 +45,7 @@ export default function Purchase() {
     }, [purchaseId]);
     const getPurchaseProducts = useCallback(async () => {
         try {
-            const res = await axios.get(`/admin/purchase/${purchaseId}`);
+            const res = await axios.get(`${BASE_URL}/admin/purchase/${purchaseId}`);
             const purchaseData = res.data;
             const purchaseProducts = purchaseData?.items?.map((item) => ({
                 item_id: item.id,
@@ -82,7 +82,7 @@ export default function Purchase() {
         // setLoading(true);
 
         try {
-            const res = await axios.get("/admin/products", {
+            const res = await axios.get(`${BASE_URL}/admin/products`, {
                 params: { search: searchTerm },
             });
 
@@ -240,7 +240,7 @@ export default function Purchase() {
                 //        totals,
                 //    }); return;
                 try {
-                    const res = await axios.post("/admin/purchase", {
+                    const res = await axios.post(`${BASE_URL}/admin/purchase`, {
                         purchase_id: purchaseId,
                         date,
                         products,
@@ -249,7 +249,7 @@ export default function Purchase() {
                     });
                     setProducts([]);
                     toast.success(res?.data?.message);
-                    window.location.href = "/admin/purchase";
+                    window.location.href = `${BASE_URL}/admin/purchase`;
                 } catch (err) {
                     toast.error(
                         err.response?.data?.message || "Une erreur s'est produite"
@@ -269,7 +269,7 @@ export default function Purchase() {
             }
 
             try {
-                const res = await axios.get("/admin/products", {
+                const res = await axios.get(`${BASE_URL}/admin/products`, {
                     params: { search: searchTerm },
                 });
 

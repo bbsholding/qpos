@@ -12,7 +12,7 @@ const Suppliers = ({ setSupplierId,oldSupplier }) => {
     });
     const [errors, setErrors] = useState({});
     useEffect(() => {
-        axios.get("/admin/suppliers").then((response) => {
+        axios.get(`${BASE_URL}/admin/suppliers`).then((response) => {
             const supplierOptions = response?.data?.map((supplier) => ({
                 value: supplier.id,
                 label: supplier.name,
@@ -24,7 +24,7 @@ const Suppliers = ({ setSupplierId,oldSupplier }) => {
     useEffect(() => {
         setSupplierId(selectedSupplier?.value);
     }, [selectedSupplier]);
-    
+
     useEffect(() => {
         setSelectedSupplier(oldSupplier);
     }, [oldSupplier]);
@@ -51,7 +51,7 @@ const Suppliers = ({ setSupplierId,oldSupplier }) => {
     // Handle form submission to create a new supplier
     const handleCreateSupplier = () => {
         axios
-            .post("/admin/create/suppliers", newSupplier)
+            .post(`${BASE_URL}/admin/create/suppliers`, newSupplier)
             .then((response) => {
                 const newSupplier = response.data;
                 const newOption = {
@@ -86,7 +86,7 @@ const Suppliers = ({ setSupplierId,oldSupplier }) => {
                 placeholder="Select supplier"
                 required
             />
-            
+
             {/* <button
                 type="button"
                 className="btn btn-primary mt-3"

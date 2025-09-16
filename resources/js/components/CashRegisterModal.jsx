@@ -12,7 +12,7 @@ export default function CashRegisterModal({ isOpen, onClose, type = "open", onSu
         e.preventDefault();
         setLoading(true);
         try {
-            const url = type === "open" ? "/admin/cash-register/open" : "/admin/cash-register/close";
+            const url = type === "open" ? `${BASE_URL}/admin/cash-register/open` : `${BASE_URL}/admin/cash-register/close`;
             const field = type === "open" ? "opening_amount" : "closing_amount";
             const res = await axios.post(url, { [field]: amount });
             toast.success(res.data.message);

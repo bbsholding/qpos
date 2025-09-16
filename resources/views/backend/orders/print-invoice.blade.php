@@ -1,5 +1,5 @@
 @extends('backend.master')
-@section('title', 'Invoice_'.$order->id)
+@section('title', 'Facture_'.$order->id)
 @section('content')
 <div class="card">
   <div class="card-body">
@@ -17,10 +17,10 @@
           </h2>
         </div>
         <div class="col-4">
-          <h4 class="page-header">Invoice</h4>
+          <h4 class="page-header">Facture</h4>
         </div>
         <div class="col-4">
-          <small class="float-right text-small">Date: {{date('d/m/Y')}}</small>
+          <small class="float-right text-small">Date : {{date('d/m/Y')}}</small>
         </div>
         <!-- /.col -->
       </div>
@@ -29,31 +29,28 @@
         <!-- /.col -->
         <div class="col-sm-5 invoice-col">
           @if(readConfig('is_show_customer_invoice'))
-          To
+          À
           <address>
-            <strong>Name: {{$order->customer->name??"N/A"}}</strong><br>
-            Address: {{$order->customer->address??"N/A"}}<br>
-            Phone: {{$order->customer->phone??"N/A"}}<br>
+            <strong>Nom : {{$order->customer->name??"N/A"}}</strong><br>
+            Adresse : {{$order->customer->address??"N/A"}}<br>
+            Téléphone : {{$order->customer->phone??"N/A"}}<br>
           </address>
           @endif
         </div>
         <div class="col-sm-4 invoice-col">
-          From
+          De
           <address>
-            @if(readConfig('is_show_site_invoice'))<strong>Name:{{ readConfig('site_name') }}</strong><br> @endif
-            @if(readConfig('is_show_address_invoice'))Address: {{ readConfig('contact_address') }}<br>@endif
-            @if(readConfig('is_show_phone_invoice'))Phone: {{ readConfig('contact_phone') }}<br>@endif
-            @if(readConfig('is_show_email_invoice'))Email: {{ readConfig('contact_email') }}<br>@endif
+            @if(readConfig('is_show_site_invoice'))<strong>Nom : {{ readConfig('site_name') }}</strong><br> @endif
+            @if(readConfig('is_show_address_invoice'))Adresse : {{ readConfig('contact_address') }}<br>@endif
+            @if(readConfig('is_show_phone_invoice'))Téléphone : {{ readConfig('contact_phone') }}<br>@endif
+            @if(readConfig('is_show_email_invoice'))Email : {{ readConfig('contact_email') }}<br>@endif
           </address>
         </div>
         <!-- /.col -->
         <div class="col-sm-3 invoice-col">
-          Info <br>
-          Sale ID #{{$order->id}}<br>
-          Sale Date: {{date('d/m/Y', strtotime($order->created_at))}}<br>
-          <!-- <br>
-          <b>Payment Due:</b> 2/22/2014<br>
-          <b>Account:</b> 968-34567 -->
+          Infos <br>
+          ID Vente #{{$order->id}}<br>
+          Date de Vente : {{date('d/m/Y', strtotime($order->created_at))}}<br>
         </div>
         <!-- /.col -->
       </div>
@@ -65,11 +62,11 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th>SN</th>
-                <th>Product</th>
-                <th>Quantity</th>
-                <th>Price {{currency()->symbol??''}}</th>
-                <th>Subtotal {{currency()->symbol??''}}</th>
+                <th>N°</th>
+                <th>Produit</th>
+                <th>Quantité</th>
+                <th>Prix {{currency()->symbol??''}}</th>
+                <th>Sous-total {{currency()->symbol??''}}</th>
               </tr>
             </thead>
             <tbody>
@@ -97,36 +94,32 @@
       <div class="row">
         <!-- accepted payments column -->
         <div class="col-6">
-          <!-- <p class="lead">Payment:Cash Paid</p> -->
-          <!-- <small class="lead text-small text-bold">Payment:Cash Paid</small> -->
           <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
             @if(readConfig('is_show_note_invoice')){{ readConfig('note_to_customer_invoice') }}@endif
           </p>
         </div>
         <!-- /.col -->
         <div class="col-6">
-          <!-- <p class="lead">Amount Due 2/22/2014</p> -->
-
           <div class="table-responsive">
             <table class="table">
               <tr>
-                <th style="width:50%">Subtotal:</th>
+                <th style="width:50%">Sous-total :</th>
                 <td class="text-right">{{currency()->symbol.' '.number_format($order->sub_total,2,'.',',')}}</td>
               </tr>
               <tr>
-                <th>Discount:</th>
+                <th>Remise :</th>
                 <td class="text-right">{{currency()->symbol.' '.number_format($order->discount,2,'.',',')}}</td>
               </tr>
               <tr>
-                <th>Total:</th>
+                <th>Total :</th>
                 <td class="text-right">{{currency()->symbol.' '.number_format($order->total,2,'.',',')}}</td>
               </tr>
               <tr>
-                <th>Paid:</th>
+                <th>Payé :</th>
                 <td class="text-right">{{currency()->symbol.' '.number_format($order->paid,2,'.',',')}}</td>
               </tr>
               <tr>
-                <th>Due:</th>
+                <th>Reste :</th>
                 <td class="text-right">{{currency()->symbol.' '.number_format($order->due,2,'.',',')}}</td>
               </tr>
             </table>
@@ -136,7 +129,7 @@
       </div>
       <div class="row no-print">
         <div class="col-12">
-          <button type="button" onclick="window.print()" class="btn btn-success float-right"><i class="fas fa-print"></i> Print</a>
+          <button type="button" onclick="window.print()" class="btn btn-success float-right"><i class="fas fa-print"></i> Imprimer</a>
           </button>
         </div>
       </div>

@@ -9,7 +9,7 @@ import playSound from "../utils/playSound";
 export default function Cart({ carts, setCartUpdated, cartUpdated }) {
     function increment(id) {
         axios
-            .put("/admin/cart/increment", {
+            .put(`${BASE_URL}/admin/cart/increment`, {
                 id: id,
             })
             .then((res) => {
@@ -24,7 +24,7 @@ export default function Cart({ carts, setCartUpdated, cartUpdated }) {
     }
     function decrement(id) {
         axios
-            .put("/admin/cart/decrement", {
+            .put(`${BASE_URL}/admin/cart/decrement`, {
                 id: id,
             })
             .then((res) => {
@@ -52,7 +52,7 @@ export default function Cart({ carts, setCartUpdated, cartUpdated }) {
         }).then((result) => {
             if (result.isConfirmed) {
                 axios
-                    .put("/admin/cart/delete", {
+                    .put(`${BASE_URL}/admin/cart/delete`, {
                         id: id,
                     })
                     .then((res) => {

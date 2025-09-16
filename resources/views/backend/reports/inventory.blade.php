@@ -12,9 +12,9 @@
             <thead>
               <tr>
                 <th data-orderable="false">#</th>
-                <th>Name</th>
+                <th>Nom</th>
                 <th>SKU</th>
-                <th>Price</th>
+                <th>Prix</th>
                 <th>Stock</th>
               </tr>
             </thead>
