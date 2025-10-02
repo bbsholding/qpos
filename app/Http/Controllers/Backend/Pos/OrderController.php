@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Backend\Pos;
 
 use App\Http\Controllers\Controller;
+use App\Models\CashRegister;
 use App\Models\Order;
 use App\Models\OrderTransaction;
 use App\Models\PosCart;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Auth;
+
 
 class OrderController extends Controller
 {
@@ -91,6 +94,10 @@ class OrderController extends Controller
             'customer_id' => $request->customer_id,
             'user_id' => $request->user()->id,
         ]);
+         $cashRegister = CashRegister::where('user_id', Auth::id())
+            ->where('status', 'open')
+            ->first();
+
         $totalAmountOrder = 0;
         $orderDiscount = $request->order_discount;
         foreach ($carts as $cart) {

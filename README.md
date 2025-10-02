@@ -344,3 +344,15 @@ Stay updated with the latest news, updates, and releases:
 [![X](https://img.shields.io/badge/X-000000?style=for-the-badge&logo=x&logoColor=white)](https://twitter.com/qtec_solution)
 [![YouTube](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/@qtecsolutionlimited)
 [![Website](https://img.shields.io/badge/Website-000000?style=for-the-badge&logo=google-chrome&logoColor=white)](https://qtecsolution.com/)
+
+Faire un CRUD caisse
+
+Creer un formulaire d'ouverture de session de caisse
+    Selectionner la caisse/terminal
+    Saisir le solde d'ouverture
+    Saisir les notes
+Créer un formulaire de fermeture de session de caisse
+    Selectionner la caisse/terminal
+    Saisir le solde de fermeture
+    Saisir les notes
+Afficher le rapport de la session de caisse
