@@ -9,12 +9,15 @@ class CreateCashMovementsTable extends Migration
 {
     public function up()
     {
-        Schema::create('mouvements_caisse', function (Blueprint $table) {
+        Schema::create('mouvement_caisses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('session_caisse_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->enum('type', ['entree', 'sortie', 'vente', 'remboursement']);
-            $table->decimal('amount', 10, 2);
+            $table->decimal('montant', 10, 2);
+            $table->decimal('montant_a_paye_mobile_money', 10, 2)->default(0);
+            $table->decimal('montant_recu', 10, 2);
+            $table->decimal('monnaie_rendue', 10, 2);
             $table->string('methode_paiement')->default('espece');
             $table->string('reference')->nullable();
             $table->text('description')->nullable();

@@ -88,6 +88,51 @@ $route = request()->route()->getName();
             </li>
             @endif
             @if (auth()->user()->hasAnyPermission([
+            //customer
+            'customer_create',
+            'customer_view',
+            'customer_update',
+            'customer_delete',
+            'customer_sales',
+            //supplier
+            'supplier_create',
+            'supplier_view',
+            'supplier_update',
+            'supplier_delete',
+            ]))
+            <li class="nav-item {{ request()->routeIs(['backend.admin.customers.index', 'backend.admin.customers.create', 'backend.admin.customers.edit','backend.admin.suppliers.index', 'backend.admin.suppliers.create', 'backend.admin.suppliers.edit']) ? 'menu-open' : '' }}">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-user-circle nav-icon"></i>
+                    <p>
+                        Caisses
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    @if (auth()->user()->hasAnyPermission(['customer_create','customer_view','customer_update','customer_delete']))
+                    <li class="nav-item">
+                        <a href="{{route('backend.admin.caisses.index')}}"
+                            class="nav-link {{ request()->routeIs(['backend.admin.caisses.index','backend.admin.caisses.edit','backend.admin.caisses.create']) ? 'active' : '' }}">
+                            <i class="fas fa-circle nav-icon"></i>
+                            <p>Liste des caisses</p>
+                        </a>
+                    </li>
+                    @endif
+                </ul>
+                <ul class="nav nav-treeview">
+                    @if (auth()->user()->hasAnyPermission(['supplier_create','supplier_view','supplier_update','supplier_delete']))
+                    <li class="nav-item">
+                        <a href="{{route('backend.admin.suppliers.index')}}"
+                            class="nav-link {{ request()->routeIs(['backend.admin.suppliers.index','backend.admin.suppliers.edit','backend.admin.suppliers.create']) ? 'active' : '' }}">
+                            <i class="fas fa-circle nav-icon"></i>
+                            <p>Session de caisse</p>
+                        </a>
+                    </li>
+                    @endif
+                </ul>
+            </li>
+            @endif
+            @if (auth()->user()->hasAnyPermission([
             'product_create',
             'product_view',
             'product_update',

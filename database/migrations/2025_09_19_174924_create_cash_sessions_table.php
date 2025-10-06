@@ -9,7 +9,7 @@ class CreateCashSessionsTable extends Migration
 {
     public function up()
     {
-        Schema::create('sessions_caisse', function (Blueprint $table) {
+        Schema::create('session_caisses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('caisse_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');

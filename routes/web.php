@@ -22,6 +22,8 @@ use App\Http\Controllers\Backend\RolePermission\RoleController;
 use App\Http\Controllers\Backend\Product\UnitController;
 use App\Http\Controllers\Backend\UserManagementController;
 use App\Http\Controllers\Backend\WebsiteSettingController;
+use App\Http\Controllers\Backend\CaisseController;
+use App\Http\Controllers\Backend\SessionCaisseController;
 use App\Models\Supplier;
 use App\Http\Controllers\Backend\CashRegisterController;
 
@@ -69,6 +71,8 @@ Route::prefix('admin')->as('backend.admin.')->middleware(['admin'])->group(funct
     Route::resource('purchase', PurchaseController::class);
     Route::resource('suppliers', SupplierController::class);
     Route::resource('customers', CustomerController::class);
+    Route::resource('caisses', CaisseController::class);
+    Route::resource('sessions-caisse', SessionCaisseController::class);
     Route::resource('products', ProductController::class);
     Route::resource('units', UnitController::class);
     Route::resource('currencies', CurrencyController::class);
